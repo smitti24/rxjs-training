@@ -21,5 +21,5 @@ eg: long polling in the background.
     - Extension to Javascript.
 
 **Rxjs Observable**
-
+- Observable will only become a stream if it is subscribed too.
 

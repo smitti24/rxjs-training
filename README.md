@@ -23,8 +23,17 @@ eg: long polling in the background.
 **Rxjs Observable**
 - Observable will only become a stream if it is subscribed too.
 - Blueprint of a stream.
+- If defined does not trigger a request.
 - Subscribe:
     - next
     - error
     - completed
+    - noop
+        - no operation
+    
+- Promise:
+    - Gets immediately executed once its defined.
+    
+
+    
 

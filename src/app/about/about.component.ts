@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {fromEvent, interval, noop, Observable, timer} from "rxjs";
+import {createHttpObservable} from "../common/util";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'about',
@@ -14,28 +16,14 @@ export class AboutComponent implements OnInit {
   ngOnInit() {
 
     //Create observable
-    const http$ = new Observable((observer) => {
-      //Returns a promise.
-      fetch('/api/courses')
-        .then((response) => {
-          return response.json();
-        })
-        .then((body) => {
-          // Used to emit values in the observable.
-          observer.next(body);
+    const http$ = createHttpObservable('api/courses');
 
-          // Terminate http stream
-          observer.complete();
+    const courses$ = http$
+      .pipe(
+        map(res => Object.values(res["payload"]))
+      );
 
-          // Breaks observable contract!
-          // observer.next();
-        })
-        .catch(error => {
-          observer.error(error);
-        })
-    });
-
-    http$.subscribe(
+    courses$.subscribe(
       courses => console.log(courses),
       noop,
       () => console.log('completed')
@@ -69,5 +57,6 @@ export class AboutComponent implements OnInit {
     // );
 
   }
+
 
 }

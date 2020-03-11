@@ -34,6 +34,12 @@ eg: long polling in the background.
 - Promise:
     - Gets immediately executed once its defined.
     
+**Map**
+- Transforms the items emitted by an Observable by applying a function to each item.
+
+**Pipe**
+- Allows us to chain multiple rxjs operators in order to produce a new observable.
+    
 
     
 

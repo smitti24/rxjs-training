@@ -15,7 +15,12 @@ export class AboutComponent implements OnInit {
     // Definition for a stream of values.
     const interval$ = interval(1000);
 
-    interval$.subscribe( val => console.log('Stream 1 => ' + val));
+    const sub = interval$.subscribe( val => console.log('Stream 1 => ' + val));
+
+    // Prevents any values from being printed to the console after 5 seconds.
+    setTimeout(() => {
+      sub.unsubscribe();
+    }, 5000);
 
     interval$.subscribe( val => console.log('Stream 2 => ' + val));
 
@@ -25,7 +30,14 @@ export class AboutComponent implements OnInit {
 
     const click$ = fromEvent(document, 'click');
 
-    click$.subscribe(evt => console.log(evt));
+    click$.subscribe(
+      evt => console.log(evt),
+
+      err => console.log(err),
+
+      () => console.log('completed')
+
+    );
 
   }
 

@@ -42,8 +42,8 @@ eg: long polling in the background.
 
 **Imperative Design**
 - Nesting subscribe calls together.
-
-```courses$.subscribe(
+```
+courses$.subscribe(
           courses => {
             this.beginnersCourses = courses.filter(course => course.category === 'BEGINNER');
             this.advancedCourses = courses.filter(course => course.category === 'ADVANCED');
@@ -51,6 +51,29 @@ eg: long polling in the background.
           noop,
           () => console.log('completed')
         )
-    
+```
+
+**Reactive Design**
+- Dont use subscribe method
+- Define streams of values using observables and rxjs functions.
+- Subscription to the observable happens on the template.
+
+```      
+this.beginnersCourses$ = http$
+           .pipe(
+             map(courses => courses
+               .filter(course => course.category === 'BEGINNER'))
+           );
+```
+
+**ShareReplay**
+- Share the execution of a stream accross multiple observables.
+- This means that only one http call will be fired.
+- Http response is passed on to each of the subscribers instead of executing the same http request again.
+
+**tap**
+- Used to produce side effects in our observable chain.
+- When we want to update something outside the observable chain
+- 
     
 

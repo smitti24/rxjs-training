@@ -39,7 +39,18 @@ eg: long polling in the background.
 
 **Pipe**
 - Allows us to chain multiple rxjs operators in order to produce a new observable.
-    
 
+**Imperative Design**
+- Nesting subscribe calls together.
+
+```courses$.subscribe(
+          courses => {
+            this.beginnersCourses = courses.filter(course => course.category === 'BEGINNER');
+            this.advancedCourses = courses.filter(course => course.category === 'ADVANCED');
+          },
+          noop,
+          () => console.log('completed')
+        )
+    
     
 

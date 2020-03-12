@@ -70,10 +70,51 @@ this.beginnersCourses$ = http$
 - Share the execution of a stream accross multiple observables.
 - This means that only one http call will be fired.
 - Http response is passed on to each of the subscribers instead of executing the same http request again.
+- We don't want our application to do multiple requests to fetch the same data
+- To handle http requests as rxjs streams.
+- When you have two http requests that are subscribed to the same observable, 
+-Shares the execution of the stream across multiple subscribers
+    -Thereby avoiding the default observable behaviour, that creates a complete new stream by subscription
 
 **tap**
 - Used to produce side effects in our observable chain.
 - When we want to update something outside the observable chain
-- 
+
+**concatMap**
+- Function that turns a value into a observable.
+- Allows Observables to perform in sequence, one after the other.
+- Takes in a Observable function.
+```
+     ngOnInit() {
+        this.form.valueChanges
+          .pipe(
+            filter(() => this.form.valid),
+            concatMap(changes => this.saveCourse(changes))
+          )
+          .subscribe();
+      }
     
+      private saveCourse(changes) {
+        return fromPromise(
+          fetch(`/api/couses/${this.course.id}`, {
+            method: 'PUT',
+            body: JSON.stringify(changes),
+            headers: {
+              'content-type': 'application/json',
+            }
+          }));
+      }
+```
+**merge**
+- Take multiple observables, subscribe to all of them, and then take the values of each of these observables
+- Ideal for performing async operations in parallel.
+- Flattens multiple Observables together by blending their values into one Observable.
+- Http requests in parallel.
+
+**mergeMap**
+- Maps each value to an Observable, then flattens all these inner Observables.
+- Take the values of the source observable, apply a mapping function to it that is going to take the value and produce a new observable from it.
+- Does not wait for previous observables to complete first.
+- Runs Observables in parallel.
+- Will only output a value when the source Observable has completed.
 

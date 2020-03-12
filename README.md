@@ -123,3 +123,19 @@ this.beginnersCourses$ = http$
 - Ignores new requests if a request is still being emitted.
 - Example: Clicking a save button multiple times.
 
+**AbortController**
+- A controller object that allows you to abort one or more Web requests as and when desired.
+- .signal
+    - Returns a AbortSignal object instance, which can be used to communicate with/abort a DOM request.
+- Specified as part of the fetch api.
+- Example:
+```
+const controller = new AbortController();
+    const signal = controller.signal;
+
+    //Returns a promise.
+    fetch(url, {signal})
+```
+- When the fetch request is initiated, we pass in the AbortSignal as an option inside the request's options object.
+- Now you will be able to call .unsubscribe from the Observable using the http request method.
+

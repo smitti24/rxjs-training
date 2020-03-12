@@ -118,3 +118,8 @@ this.beginnersCourses$ = http$
 - Runs Observables in parallel.
 - Will only output a value when the source Observable has completed.
 
+**exhaustMap**
+- Merges Observables only if the previous Observable has been completed, else it ignores it.
+- Ignores new requests if a request is still being emitted.
+- Example: Clicking a save button multiple times.
+

@@ -11,48 +11,34 @@ import {createHttpObservable} from "../common/util";
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  // Definitions of streams of data.
-  public beginnersCourses$: Observable<Course[]>;
-  public advancedCourses$: Observable<Course[]>;
+  beginnerCourses$: Observable<Course[]>;
 
-    constructor() {
+  advancedCourses$: Observable<Course[]>;
 
-    }
+  ngOnInit() {
 
-    ngOnInit() {
-      //Create observable
-      const http$ = createHttpObservable('api/courses');
+    const http$ = createHttpObservable('/api/courses');
 
-      // @ts-ignore
-      const courses$: Observable<Course[]> = http$
-        .pipe(
-          tap( () => console.log('Http request executed')),
-          map(res => Object.values(res["payload"])),
-          shareReplay()
-        );
+    // @ts-ignore
+    const courses$: Observable<Course[]> = http$
+      .pipe(
+        tap(() => console.log("HTTP request executed")),
+        map(res => Object.values(res["payload"]) )
+      );
 
-      this.beginnersCourses$ = http$
-        .pipe(
-          map(courses => courses
-            .filter(course => course.category === 'BEGINNER'))
-        );
+    this.beginnerCourses$ = courses$
+      .pipe(
+        map(courses => courses
+          .filter(course => course.category == 'BEGINNER'))
+      );
 
-      this.advancedCourses$ = http$
-        .pipe(
-          map(courses => courses
-            .filter(course => course.category === 'ADVANCED'))
-        );
+    this.advancedCourses$ = courses$
+      .pipe(
+        map(courses => courses
+          .filter(course => course.category == 'ADVANCED'))
+      );
 
-      courses$.subscribe(
-        courses => {
-
-        },
-        noop,
-        () => console.log('completed')
-      )
-
-
-    }
+  }
 
 }
 

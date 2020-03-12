@@ -1,7 +1,7 @@
 import {Observable} from "rxjs";
 
 
-export function createHttpObservable(url: string): Observable<any> {
+export function createHttpObservable(url: string) {
   return new Observable((observer) => {
 
     const controller = new AbortController();
@@ -10,7 +10,12 @@ export function createHttpObservable(url: string): Observable<any> {
     //Returns a promise.
     fetch(url, {signal})
       .then((response) => {
-        return response.json();
+        if (response.ok) {
+          return response.json();
+        }
+        else {
+          observer.error('Request failed with status code: ' + response.status);
+        }
       })
       .then((body) => {
         // Used to emit values in the observable.

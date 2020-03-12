@@ -139,3 +139,15 @@ const controller = new AbortController();
 - When the fetch request is initiated, we pass in the AbortSignal as an option inside the request's options object.
 - Now you will be able to call .unsubscribe from the Observable using the http request method.
 
+**debounceTime**
+- Emits a value from a source Observable only after a specified time span has passed without any source emission.
+- Delay
+- Passes only the most recent value from the burst of emissions.
+
+**distinctUntilChanged**
+- Ignores same values in the source Observable.
+
+**switchMap**
+- Unsubscription Logic
+- Projects each source value to an Observable which is merged in the output Observable, emitting only the values from the most recent projected Observable.
+- Cancels any ongoing requests and emits the next request, unsubscribes from the Observable and switches to the new Observable.

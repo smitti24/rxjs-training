@@ -27,6 +27,7 @@ export function createHttpObservable(url: string) {
         // Breaks observable contract!
         // observer.next();
       })
+      // Only triggered in the case of a fatal error.
       .catch(error => {
         observer.error(error);
       });

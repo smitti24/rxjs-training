@@ -143,6 +143,12 @@ const controller = new AbortController();
 - Emits a value from a source Observable only after a specified time span has passed without any source emission.
 - Delay
 - Passes only the most recent value from the burst of emissions.
+- Search input. Waits for value to become stable ( User stops typing ).
+
+**throttle**
+- Emits a value from the source observable, then ignores subsequent source values for a duration determined by another observable, then repeats the process.
+- Limiting the output by limiting the number if values that can be emitted in a certain interval.
+- Uses auxiliary timer variable, that is used to determine when we should emit a value from a input stream
 
 **distinctUntilChanged**
 - Ignores same values in the source Observable.

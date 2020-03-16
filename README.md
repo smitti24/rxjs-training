@@ -159,4 +159,8 @@ const controller = new AbortController();
     - Any observable, not only of needs to be used.
     - Fetch can be used to fetch data from an offline database etc...
     
+**retryWhen**
+- Creates a new stream and subscribes to the new stream.
+- Done until the stream no longer errors out.
+    
     

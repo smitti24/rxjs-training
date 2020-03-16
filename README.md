@@ -151,3 +151,12 @@ const controller = new AbortController();
 - Unsubscription Logic
 - Projects each source value to an Observable which is merged in the output Observable, emitting only the values from the most recent projected Observable.
 - Cancels any ongoing requests and emits the next request, unsubscribes from the Observable and switches to the new Observable.
+
+**Recovery Observable Error Handling**
+- catchError(err => of ([])
+    - **Alternative** error observable, that is only consumed by the component if the http request errors out.
+    - Provides default data.
+    - Any observable, not only of needs to be used.
+    - Fetch can be used to fetch data from an offline database etc...
+    
+    

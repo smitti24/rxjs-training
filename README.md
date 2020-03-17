@@ -236,5 +236,20 @@ const controller = new AbortController();
 **ReplaySubject**
 - Replays the complete observable to all late subscribers.
 - Does not need observable completion.
+
+**Centralized Store**
+- Centralized service that contains data that exposes a couple of observables.
+- Fetches the data at the appropriate moment, stores the data in an observable.
+
+**first**
+- Force the completion of an existing Observable.
+- Emits only the first value.
+
+**take**
+- Takes the first count values from the source then completes.
+
+**withLatestFrom**
+- Taking the latest value emitted from each Observable and providing that to the next operator in the chain or to the subscribed method as a tuple method.
+- Whenever the source Observable emits a value, it computes a formula using that value plus the latest values from other input Observables, then emits the output of that formula.
     
     

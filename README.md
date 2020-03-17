@@ -173,4 +173,9 @@ const controller = new AbortController();
 - Higher order function
     - Function that returns other functions.
     
+**forkJoin**
+- Allows us to launch several tasks in parallel, waits fot the tasks to complete, and use those combined results together.
+- All observables HAVE TO COMPLETE before a value will be emitted.
+- Handling multiple Http requests.
+    
     

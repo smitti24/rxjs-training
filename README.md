@@ -168,5 +168,9 @@ const controller = new AbortController();
 **retryWhen**
 - Creates a new stream and subscribes to the new stream.
 - Done until the stream no longer errors out.
+
+**Custom RxJs Operators**
+- Higher order function
+    - Function that returns other functions.
     
     

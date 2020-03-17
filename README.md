@@ -251,5 +251,15 @@ const controller = new AbortController();
 **withLatestFrom**
 - Taking the latest value emitted from each Observable and providing that to the next operator in the chain or to the subscribed method as a tuple method.
 - Whenever the source Observable emits a value, it computes a formula using that value plus the latest values from other input Observables, then emits the output of that formula.
-    
+
+**Summary:**
+- Stream of values.
+- Observable => definition of a type of stream,
+    - Create a stream from an observable by subscribing to it.
+- Dont subscribe to each observable or nest subscriptions.
+- Components are not designed using member variables that directly contain the data, giving the components the ability to directly mutate the data.
+    - Instead the components are defined using observables of data.
+    - Using the async type
+    - Component does not have access to the data (ie. cannot mutate the date)
+- Components consume the data from the store by subscribing to a long running observable.
     

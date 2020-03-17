@@ -177,5 +177,64 @@ const controller = new AbortController();
 - Allows us to launch several tasks in parallel, waits fot the tasks to complete, and use those combined results together.
 - All observables HAVE TO COMPLETE before a value will be emitted.
 - Handling multiple Http requests.
+
+**RxJs Subject**
+- An observer and an Observable
+- Can emit values, and also combine it with other observables
+- Private to the part of the program that emits a given set of data.
+- Custom Observable.
+- Good for multi casting.
+    - Takes one value from one observable stream, and re emits it into multiple seperate output streams.
+    
+```
+        const subject = new Subject();
+    
+        //Emits values of the subject
+        const series1$ = subject.asObservable();
+    
+        series1$.subscribe(console.log);
+   
+        subject.next(1);
+        subject.next(2);
+        subject.next(3);
+    
+        subject.complete();
+```
+ 
+ **BehaviorSubject**
+ - Like Subject, but supports LATE subscriptions.
+ - Always provides something to subscribers, even if the subscription happens late.
+ - Needs an initial value.
+ ```
+    const subject = new BehaviorSubject(0);
+
+    //Emits values of the subject
+    const series1$ = subject.asObservable();
+
+    series1$.subscribe((val => console.log("Early sub:" + val)));
+
+
+    subject.next(1);
+    subject.next(2);
+    subject.next(3);
+
+    // subject.complete();
+
+    setTimeout(() => {
+      series1$.subscribe((val => console.log("Late sub:" + val)));
+      subject.next(4);
+    }, 3000)
+
+```
+
+**AsyncSubject**
+- Long running calculations.
+    - Calculation is running, but we report the last value when calculation is complete.
+- Wait for Observable completion before emitting any values to the multiple subscribers.
+- Also supports late subscriptions.
+    
+**ReplaySubject**
+- Replays the complete observable to all late subscribers.
+- Does not need observable completion.
     
     
